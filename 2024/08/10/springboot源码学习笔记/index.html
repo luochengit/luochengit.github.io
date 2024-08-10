@@ -1,0 +1,458 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#FFF">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+<link rel="alternate" type="application/rss+xml" title="Hexo" href="http://example.com/rss.xml" />
+<link rel="alternate" type="application/atom+xml" title="Hexo" href="http://example.com/atom.xml" />
+<link rel="alternate" type="application/json" title="Hexo" href="http://example.com/feed.json" />
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+
+  
+
+<link rel="canonical" href="http://example.com/2024/08/10/springboot%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+
+
+  <title>
+springboot源码学习笔记 |
+Luo Chen = Hexo</title>
+<meta name="generator" content="Hexo 7.2.0"></head>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div id="loading">
+    <div class="cat">
+      <div class="body"></div>
+      <div class="head">
+        <div class="face"></div>
+      </div>
+      <div class="foot">
+        <div class="tummy-end"></div>
+        <div class="bottom"></div>
+        <div class="legs left"></div>
+        <div class="legs right"></div>
+      </div>
+      <div class="paw">
+        <div class="hands left"></div>
+        <div class="hands right"></div>
+      </div>
+    </div>
+  </div>
+  <div id="container">
+    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="inner">
+        <div id="brand">
+          <div class="pjax">
+          
+  <h1 itemprop="name headline">springboot源码学习笔记
+  </h1>
+  
+<div class="meta">
+  <span class="item" title="Created: 2024-08-10 15:04:00">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <span class="text">Posted on</span>
+    <time itemprop="dateCreated datePublished" datetime="2024-08-10T15:04:00+08:00">2024-08-10</time>
+  </span>
+</div>
+
+
+          </div>
+        </div>
+        <nav id="nav">
+  <div class="inner">
+    <div class="toggle">
+      <div class="lines" aria-label="Toggle navigation bar">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+    <ul class="menu">
+      <li class="item title"><a href="/" rel="start">Luo Chen</a></li>
+    </ul>
+    <ul class="right">
+      <li class="item theme">
+        <i class="ic i-sun"></i>
+      </li>
+      <li class="item search">
+        <i class="ic i-search"></i>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+      </div>
+      <div id="imgs" class="pjax">
+        <ul>
+          <li class="item" data-background-image="https://tva4.sinaimg.cn/large/6833939bly1gipevuctzzj20zk0m84qp.jpg"></li>
+          <li class="item" data-background-image="https://tva4.sinaimg.cn/large/6833939bly1gipex2cdtbj20zk0m8x6p.jpg"></li>
+          <li class="item" data-background-image="https://tva4.sinaimg.cn/large/6833939bly1gipew8gmvyj20zk0m87wh.jpg"></li>
+          <li class="item" data-background-image="https://tva4.sinaimg.cn/large/6833939bly1gicit4jrvuj20zk0m8785.jpg"></li>
+          <li class="item" data-background-image="https://tva4.sinaimg.cn/large/6833939bly1gipetv6p75j20zk0m8x6p.jpg"></li>
+          <li class="item" data-background-image="https://tva4.sinaimg.cn/large/6833939bly1gipeudstjqj20zk0m8k3r.jpg"></li>
+        </ul>
+      </div>
+    </header>
+    <div id="waves">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" />
+          <use xlink:href="#gentle-wave" x="48" y="3" />
+          <use xlink:href="#gentle-wave" x="48" y="5" />
+          <use xlink:href="#gentle-wave" x="48" y="7" />
+        </g>
+      </svg>
+    </div>
+    <main>
+      <div class="inner">
+        <div id="main" class="pjax">
+          
+  <div class="article wrap">
+    
+<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+<i class="ic i-home"></i>
+<span><a href="/">Home</a></span>
+</div>
+
+    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="en">
+  <link itemprop="mainEntityOfPage" href="http://example.com/2024/08/10/springboot%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="image" content="/images/avatar.jpg">
+    <meta itemprop="name" content="John Doe">
+    <meta itemprop="description" content=", ">
+  </span>
+
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Hexo">
+  </span>
+
+  <div class="body md" itemprop="articleBody">
+    
+
+    <h2>1.springboot启动需要启动哪些服务。</h2>
+<h5>
+    &emsp;&emsp;springboot启动要运行在tomacat和jetty。(java web应用服务器),springboot需要创建接口服务(springMVC里的配置DispatcherServlet)。
+DispatcherServlet————根据配置的包路径去扫描容器将符合条件的方法返回给系统。创建时需要传入容器对象。<br>
+    &emsp;&emsp;Tomcat和Jetty都是一种Servlet引擎，他们都支持标准的servlet规范和JavaEE的规范。<br>
+    &emsp;&emsp;Jetty的架构比Tomcat的更为简单<br>
+    &emsp;&emsp;Jetty的架构是基于Handler来实现的，主要的扩展功能都可以用Handler来实现，扩展简单。<br>
+    &emsp;&emsp;Tomcat的架构是基于容器设计的，进行扩展是需要了解Tomcat的整体设计结构，不易扩展。<br>
+    &emsp;&emsp;Jetty和Tomcat性能方面差异不大<br>
+    &emsp;&emsp;Jetty可以同时处理大量连接而且可以长时间保持连接，适合于web聊天应用等等。<br>
+    &emsp;&emsp;Jetty的架构简单，因此作为服务器，Jetty可以按需加载组件，减少不需要的组件，减少了服务器内存开销，从而提高服务器性能。<br>
+    &emsp;&emsp;Jetty默认采用NIO结束在处理I/O请求上更占优势，在处理静态资源时，性能较高<br>
+    &emsp;&emsp;Tomcat适合处理少数非常繁忙的链接，也就是说链接生命周期短的话，Tomcat的总体性能更高。<br>
+    &emsp;&emsp;Tomcat默认采用BIO处理I/O请求，在处理静态资源时，性能较差。<br>
+    &emsp;&emsp;Jetty的应用更加快速，修改简单，对新的Servlet规范的支持较好。<br>
+    &emsp;&emsp;Tomcat目前应用比较广泛，对JavaEE和Servlet的支持更加全面，很多特性会直接集成进来<br>
+</h5>
+<h2>2.创建容器扫描</h2>    
+<h5>
+    &emsp;&emsp;在启动类上添加@ComponentScan("包路径")的方式，将指定要扫码的包路径返回。一般在启动类自定义注解中，添加完成包的扫码。
+启动类扫码run()方法中传入的类。在传入的类中，扫码类的注解，获取到应该扫码的路径。根据路径创建容器。在把容易创建传递到DispatcherServlet中。<br>
+</h5>
+<h2>3.spring加载配置类源码，基本实现</h2> 
+<h5>
+    &emsp;&emsp;spring配置bean需要手动添加，springboot会自动配置。springboot配置bean实现方式。<br>
+    &emsp;&emsp;在pom引入配置后，可以找到改自动配置的包，包下有此类的配置文件，即Configuration类。Configuration类也需要进行扫码，一般用@import(）注解进行引入，因为引入的过多不能一个一个扫码所以springboot的解决方法是，在jar包下有META-INF\spring.factcries  此文件记录了该jar的所有自动配置类名字。spring读取此文件进行解析，避免了全部扫描。扫描完所有类后，spring会对此类进行过滤。当没有使用到此类后，不会返回给spring容器。<br>
+    &emsp;&emsp;判断类是否用到的方法是，在类上有@ConditionalOnClass注解里面包含此类关联的加载类。系统会对ConditionalOnClass注解中的类进行判断。当加载了其中一个，那么这个自动配置类就是被使用了。和之前的问题一样，spring不能去读取每一个自动配置类的判断类。所以在spring.factories配置文件下还有个后缀为metadata.properties的配置文件，里面包含了所有自动配置类(key)的判断类信息。spring对自动配置类进行过滤，必须全部过滤判断配置的类是否加载了。spring使用多线程的方式对所有的自动配置类进行判断。
+</h5>
+<h2>4.其他知识点</h2>   
+<h5>
+&emsp;&emsp;在pom文件中，引入依赖。又想排除其中的部分依赖，可以采用<exclusion></exclusion>的方式。<br>
+<img data-src="依赖排除.png"><br>
+&emsp;&emsp;对bean添加指定条件。@Bean下添加@Conditional()。此注解集成了condition类，所以需要写一个继承了Condition的类。实现matchs方法，此方法就是给bean添加条件的方法。符合条件返回true，不符合返回false。<br>
+maven会依赖传递，某个模块依赖了springboot，那么他也会依赖springboot下的tomacat依赖。<br>
+&emsp;&emsp;如何判断是否获取了相关的bean对象。可以使用WebApplicationContext中的getBeansOfType获取bean。
+</h5>
+
+
+
+
+  </div>
+
+   <footer>
+
+    <div class="meta">
+  <span class="item">
+    <span class="icon">
+      <i class="ic i-calendar-check"></i>
+    </span>
+    <span class="text">Edited on</span>
+    <time title="Modified: 2024-08-10 16:54:10" itemprop="dateModified" datetime="2024-08-10T16:54:10+08:00">2024-08-10</time>
+  </span>
+</div>
+
+      
+<div class="reward">
+  <button><i class="ic i-heartbeat"></i> Donate</button>
+  <p>Give me a cup of [coffee]~(￣▽￣)~*</p>
+  <div id="qr">
+      
+      <div>
+        <img data-src="/images/wechatpay.png" alt="John Doe WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/alipay.png" alt="John Doe Alipay">
+        <p>Alipay</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/paypal.png" alt="John Doe PayPal">
+        <p>PayPal</p>
+      </div>
+  </div>
+</div>
+
+      
+
+<div id="copyright">
+<ul>
+  <li class="author">
+    <strong>Post author:  </strong>John Doe <i class="ic i-at"><em>@</em></i>Hexo
+  </li>
+  <li class="link">
+    <strong>Post link: </strong>
+    <a href="http://example.com/2024/08/10/springboot%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="springboot源码学习笔记">http://example.com/2024/08/10/springboot源码学习笔记/</a>
+  </li>
+  <li class="license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+  </footer>
+
+</article>
+
+  </div>
+  
+
+<div class="post-nav">
+    <div class="item left">
+      
+
+  <a href="/2024/07/31/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;tva4.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gipeuibk9fj20zk0m8ay2.jpg" title="微服务学习笔记">
+  <span class="type">Previous Post</span>
+  <span class="category"><i class="ic i-flag"></i> </span>
+  <h3>微服务学习笔记</h3>
+  </a>
+
+    </div>
+    <div class="item right">
+    </div>
+</div>
+
+  
+  <div class="wrap" id="comments"></div>
+
+
+        </div>
+        <div id="sidebar">
+          
+
+<div class="inner">
+
+  <div class="panels">
+    <div class="inner">
+      <div class="contents panel pjax" data-title="Contents">
+          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">1.springboot启动需要启动哪些服务。</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">
+      springboot启动要运行在tomacat和jetty。(java web应用服务器),springboot需要创建接口服务(springMVC里的配置DispatcherServlet)。
+DispatcherServlet————根据配置的包路径去扫描容器将符合条件的方法返回给系统。创建时需要传入容器对象。
+      Tomcat和Jetty都是一种Servlet引擎，他们都支持标准的servlet规范和JavaEE的规范。
+      Jetty的架构比Tomcat的更为简单
+      Jetty的架构是基于Handler来实现的，主要的扩展功能都可以用Handler来实现，扩展简单。
+      Tomcat的架构是基于容器设计的，进行扩展是需要了解Tomcat的整体设计结构，不易扩展。
+      Jetty和Tomcat性能方面差异不大
+      Jetty可以同时处理大量连接而且可以长时间保持连接，适合于web聊天应用等等。
+      Jetty的架构简单，因此作为服务器，Jetty可以按需加载组件，减少不需要的组件，减少了服务器内存开销，从而提高服务器性能。
+      Jetty默认采用NIO结束在处理I&#x2F;O请求上更占优势，在处理静态资源时，性能较高
+      Tomcat适合处理少数非常繁忙的链接，也就是说链接生命周期短的话，Tomcat的总体性能更高。
+      Tomcat默认采用BIO处理I&#x2F;O请求，在处理静态资源时，性能较差。
+      Jetty的应用更加快速，修改简单，对新的Servlet规范的支持较好。
+      Tomcat目前应用比较广泛，对JavaEE和Servlet的支持更加全面，很多特性会直接集成进来
+</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">2.创建容器扫描</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-number">2.0.0.1.</span> <span class="toc-text">
+      在启动类上添加@ComponentScan(&quot;包路径&quot;)的方式，将指定要扫码的包路径返回。一般在启动类自定义注解中，添加完成包的扫码。
+启动类扫码run()方法中传入的类。在传入的类中，扫码类的注解，获取到应该扫码的路径。根据路径创建容器。在把容易创建传递到DispatcherServlet中。
+</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.</span> <span class="toc-text">3.spring加载配置类源码，基本实现</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-number">3.0.0.1.</span> <span class="toc-text">
+      spring配置bean需要手动添加，springboot会自动配置。springboot配置bean实现方式。
+      在pom引入配置后，可以找到改自动配置的包，包下有此类的配置文件，即Configuration类。Configuration类也需要进行扫码，一般用@import(）注解进行引入，因为引入的过多不能一个一个扫码所以springboot的解决方法是，在jar包下有META-INF\spring.factcries  此文件记录了该jar的所有自动配置类名字。spring读取此文件进行解析，避免了全部扫描。扫描完所有类后，spring会对此类进行过滤。当没有使用到此类后，不会返回给spring容器。
+      判断类是否用到的方法是，在类上有@ConditionalOnClass注解里面包含此类关联的加载类。系统会对ConditionalOnClass注解中的类进行判断。当加载了其中一个，那么这个自动配置类就是被使用了。和之前的问题一样，spring不能去读取每一个自动配置类的判断类。所以在spring.factories配置文件下还有个后缀为metadata.properties的配置文件，里面包含了所有自动配置类(key)的判断类信息。spring对自动配置类进行过滤，必须全部过滤判断配置的类是否加载了。spring使用多线程的方式对所有的自动配置类进行判断。
+</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">4.</span> <span class="toc-text">4.其他知识点</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link"><span class="toc-number">4.0.0.1.</span> <span class="toc-text">
+  在pom文件中，引入依赖。又想排除其中的部分依赖，可以采用的方式。
+
+  对bean添加指定条件。@Bean下添加@Conditional()。此注解集成了condition类，所以需要写一个继承了Condition的类。实现matchs方法，此方法就是给bean添加条件的方法。符合条件返回true，不符合返回false。
+maven会依赖传递，某个模块依赖了springboot，那么他也会依赖springboot下的tomacat依赖。
+  如何判断是否获取了相关的bean对象。可以使用WebApplicationContext中的getBeansOfType获取bean。
+</span></a></li></ol></li></ol></li></ol></li></ol>
+      </div>
+      <div class="related panel pjax" data-title="Related">
+      </div>
+      <div class="overview panel" data-title="Overview">
+        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="image" itemprop="image" alt="John Doe"
+      data-src="/images/avatar.jpg">
+  <p class="name" itemprop="name">John Doe</p>
+  <div class="description" itemprop="description"></div>
+</div>
+
+<nav class="state">
+    <div class="item posts">
+      <a href="/archives/">
+        <span class="count">3</span>
+        <span class="name">posts</span>
+      </a>
+    </div>
+</nav>
+
+<div class="social">
+</div>
+
+<ul class="menu">
+  
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>Home</a>
+  </li>
+
+
+</ul>
+
+      </div>
+    </div>
+  </div>
+
+  <ul id="quick">
+    <li class="prev pjax">
+    </li>
+    <li class="up"><i class="ic i-arrow-up"></i></li>
+    <li class="down"><i class="ic i-arrow-down"></i></li>
+    <li class="next pjax">
+    </li>
+    <li class="percent"></li>
+  </ul>
+</div>
+
+
+        </div>
+        <div class="dimmer"></div>
+      </div>
+    </main>
+    <footer id="footer">
+      <div class="inner">
+        <div class="widgets">
+          
+<div class="rpost pjax">
+  <h2>Random Posts</h2>
+  <ul>
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+</div>
+
+    <span><a href="/2024/07/31/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="微服务学习笔记">微服务学习笔记</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+</div>
+
+    <span><a href="/2024/05/09/24%E5%B9%B4%E4%BA%94%E4%B8%80%E8%AE%B0%E5%BD%95/" title="24年五一记录">24年五一记录</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+</div>
+
+    <span><a href="/2024/08/10/springboot%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="springboot源码学习笔记">springboot源码学习笔记</a></span>
+  </li>
+
+  </ul>
+</div>
+<div>
+  <h2>Recent Comments</h2>
+  <ul class="leancloud-recent-comment"></ul>
+</div>
+
+        </div>
+        <div class="status">
+  <div class="copyright">
+    
+    &copy; 2010 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="ic i-sakura rotate"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">John Doe @ Luo Chen</span>
+  </div>
+  <div class="powered-by">
+    Powered by <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>
+  </div>
+</div>
+
+      </div>
+    </footer>
+  </div>
+<script data-config type="text/javascript">
+  var LOCAL = {
+    path: '2024/08/10/springboot源码学习笔记/',
+    favicon: {
+      show: "（●´3｀●）Goooood",
+      hide: "(´Д｀)Booooom"
+    },
+    search : {
+      placeholder: "Search for Posts",
+      empty: "We didn't find any results for the search: ${query}",
+      stats: "${hits} results found in ${time} ms"
+    },
+    valine: true,fancybox: true,
+    copyright: 'Copied to clipboard successfully! <br> All articles in this blog are licensed under <i class="ic i-creative-commons"></i>BY-NC-SA.',
+    ignores : [
+      function(uri) {
+        return uri.includes('#');
+      },
+      function(uri) {
+        return new RegExp(LOCAL.path+"$").test(uri);
+      }
+    ]
+  };
+</script>
+
+<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
+
+<script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
+
+<script src="/js/app.js?v=0.2.5"></script>
+
+
+
+
+</body>
+</html>
