@@ -3,7 +3,37 @@
     <id>http://example.com</id>
     <title>Hexo</title>
     <link href="http://example.com" />
-    <updated>2024-05-09T08:07:16.000Z</updated>
+    <updated>2024-07-31T01:42:33.000Z</updated>
+    <entry>
+        <id>http://example.com/2024/07/31/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</id>
+        <title>微服务学习笔记</title>
+        <link rel="alternate" href="http://example.com/2024/07/31/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/"/>
+        <content type="html">&lt;h3&gt;
+    &amp;emsp;&amp;emsp;微服务是指将业务逻辑用不同端口开启服务。服务之间用ip:port的方式进行调用。&lt;br&gt;
+    &amp;emsp;&amp;emsp;好处是a服务挂了，不影响b服务的使用。只需要保证重要的服务可以正常运行就可以。并且如果某一个服务负载较大的时候，可以添加该服务的设备打到增加此服务的运行容量。比如618商城，可以添加下单服务的机器。
+        &lt;h2&gt;什么是nacos?&lt;/h2&gt;    
+&amp;emsp;&amp;emsp;微服务服务分层但是不容易管理和调用。比如下单服务开了俩个端口9001和9002.调用这俩端口的地方也很多。不利于维护。事务不好添加管理，接口在不同服务中，微服务要使用分布式事务才能对接口进行事务管理。&amp;emsp;&amp;emsp;
+    阿里巴巴对这种情况采用了nacos(注册中心)的方式进行管理。将整个服务的端口在nacos进行注册。其他服务调取该服务的时候，可以使用进行查询。可以获取一个服务名下的所有端口。
+        &lt;h2&gt;nacos的功能及实现&lt;/h2&gt;
+        1.nacos包下有Ribbon(负载均衡器)对应的模版，添加@LoadBalanced注解后，可以将您的机器列表轮询进行调用。第一次调第一台，第二次调第二台。分担压力。现Ribbon已经过时，目前使用Spring-cloud-loadbalancer。
+        2.Ribbon的注解被使用后，当调用此方法的时候。会触发此拦截器，拦截完成后调用缓存的注册中心返回调用服务。添加新服务不用重启管理服务。ribbon定时更新服务状态，并更新注册表。
+    每个服务会定时调用注册中心的接口。当删除服务后，没有调用注册中心判断此服务已关闭。
+        3.组件openFeign动态代理。使用注解@FeignClient(value=&#39;stock-service&#39;)在interface抽象类中可直接调用其他服务的接口。采用了动态代理的实现方式。
+        4.组件sentinel可将代码进行熔断、限流、降级。有管理页面，在管理也没配置接口访问限制      
+        降级:避免微服务调用时因为服务出错导致整个服务终止。sentinel相当于try  catch将报错的信息使用降级处理的方式处理。相当于catch
+    虽然返回错误，但是可以添加错误服务的日志，其他服务可正常运行。
+        限流: 设置借口一秒内的访问量。当超过访问量则报错。
+        熔断: 设置熔断阈值。比如0.8   则一秒内的报错数量超过0.8的时候，此接口则不能访问。进入熔断状态。当熔断时长结束后，此接口可重新访问。
+        5.senta服务。用来管理微服务的事务操作。pom导入包后，在开启事务的多服务操作添加标签(@GlobalTransactional)启动事务。当进行数据操作时，senta中的undo log会记录与数据操作相反的操作日志。当需要回滚时，进行相反操作。
+    完成数据回滚。列如： insert id=1  将在undo log中生成del id=1的日志
+        &lt;h2&gt;nacos注册中心详解&lt;/h2&gt;        
+        nacos注册中心，相当于springboot的web应用，向其他服务提供http接口。当其他服务启动时，调用nacos的注册接口进行注册。并且心跳任务也是nacos的接口。同时注册中心也会使用接口定时更新注册表。
+    注册表结果为双层map，第二层map里面封装了接口地址和端口信息。这样设计是为了方便扩展。比如在外层map的key设置环境dev或者test可以将俩个环境使用
+    一个nacos。也可通过集群名称，使不同地区的服务调取相应的集群。nacos心跳保活机制  服务5秒发送一个心跳任务，nacos感知服务未发送。15秒将服务健康状态设置为false，30秒后将服务删除。
+    nacos 2.X版本处理消息更快，更多的原因是底层调用接口采用了grpc的方式比http协议更快。grpc采用http/2协议，将数据以二进制的方式进行传递。在HTTP/2中，服务器可以对客户端的一个请求发送多个响应。而不像HTTP/1.X一样，只能通过客户端发起request,服务端才产生对应的response。
+&lt;/h3&gt;</content>
+        <updated>2024-07-31T01:42:33.000Z</updated>
+    </entry>
     <entry>
         <id>http://example.com/2024/05/09/24%E5%B9%B4%E4%BA%94%E4%B8%80%E8%AE%B0%E5%BD%95/</id>
         <title>24年五一记录</title>
